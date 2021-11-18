@@ -7,9 +7,34 @@ from pages.base_page import BasePage
 from pages.locators import RegisterPageLocators
 
 class RegisterPage(BasePage):
-
-    def is_exist_register_button(self):
-        assert self.browser.find_element(*RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN), "Register button is not found"
-
-    def click_register_button(self):
+    def click_register_button(self,timeout = 10):
+        WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN))
         self.browser.find_element(*RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN).click()
+     
+    def click_submit_first_step(self):
+        self.browser.find_element(*RegisterPageLocators.SUBMIT_FIRST_STEP_BTTN).click()
+
+
+    def fill_first_step(self,email,password,firstname,lastname,dob,gender):
+        self.browser.find_element(*RegisterPageLocators.FIELD_EMAIL).send_keys(email)
+        self.browser.find_element(*RegisterPageLocators.FIELD_PASSWORD).send_keys(password)
+        self.browser.find_element(*RegisterPageLocators.FIELD_FIRSTNAME).send_keys(firstname)
+        self.browser.find_element(*RegisterPageLocators.FIELD_LASTNAME).send_keys(lastname)
+        self.browser.find_element(*RegisterPageLocators.FIELD_DOB).send_keys(dob)
+        if gender==1:
+            self.browser.find_element(*RegisterPageLocators.SELECT_GENDER_M).click()
+        else:
+            self.browser.find_element(*RegisterPageLocators.SELECT_GENDER_F).click()
+
+    def fill_second_step(self,address,city,zip, phone):
+        self.browser.find_element(*RegisterPageLocators.SELECT_COUNTRY).click()
+        self.browser.find_element(*RegisterPageLocators.SELECT_COUNTRY_ID).click()
+        self.browser.find_element(*RegisterPageLocators.FIELD_ADDRESS).send_keys(address)
+        self.browser.find_element(*RegisterPageLocators.FIELD_CITY).send_keys(city)
+        self.browser.find_element(*RegisterPageLocators.FIELD_ZIP).send_keys(zip)
+        self.browser.find_element(*RegisterPageLocators.FIELD_PHONE).send_keys(phone)
+        self.browser.find_element(*RegisterPageLocators.CHECK_ASSEPT_ALL).click()
+        self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()
+        time.sleep(5)
+        self.browser.find_element(*RegisterPageLocators.SUBMIT_SECOND_STEP_BTTN).click()
+        time.sleep(5)
