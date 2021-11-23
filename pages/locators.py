@@ -29,5 +29,22 @@ class RegisterPageLocators:
     
     SUBMIT_SECOND_STEP_BTTN = (By.CSS_SELECTOR, ".buttons-wrapper [type='submit']")
 
+    SUCCESS_MESSAGE_EMAIL = (By.CSS_SELECTOR, ".message.message-email.ng-star-inserted")
+    REGISTRATION_DONE_BTTN= (By.CSS_SELECTOR, ".button-bordered.button-md")
+    
+
+class MailPageLocators:
+    MAILINATOR_ENTER_MAIL = (By.CSS_SELECTOR, "#addOverlay")
+    MAILINATOR_GO_MAIL_PAGE_BTTN = (By.CSS_SELECTOR,"button#go-to-public")
+
+    MAILINATOR_OPEN_MESSAGE = (By.CSS_SELECTOR, "[ng-repeat = 'email in emails']")
+    MAILINATOR_OPEN_JSON_TEXT = (By.CSS_SELECTOR,"a#pills-json-tab")
+    MAILINATOR_GET_MAIL_CONTENT = (By.CSS_SELECTOR, "div#pills-json-content > pre")
+
+    
+
+
+
+
 
 

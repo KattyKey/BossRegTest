@@ -1,19 +1,18 @@
-import time
 
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
 from pages.locators import RegisterPageLocators
 
 class RegisterPage(BasePage):
-    def click_register_button(self,timeout = 10):
-        WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN))
-        self.browser.find_element(*RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN).click()
+    def click_register_button(self,timeout = 15):
+        WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN)).click()
      
     def click_submit_first_step(self):
         self.browser.find_element(*RegisterPageLocators.SUBMIT_FIRST_STEP_BTTN).click()
-
+        
+    def click_reg_done_button(self,timeout = 25):
+        WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_DONE_BTTN)).click()
 
     def fill_first_step(self,email,password,firstname,lastname,dob,gender):
         self.browser.find_element(*RegisterPageLocators.FIELD_EMAIL).send_keys(email)
@@ -35,6 +34,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.FIELD_PHONE).send_keys(phone)
         self.browser.find_element(*RegisterPageLocators.CHECK_ASSEPT_ALL).click()
         self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()
-        time.sleep(5)
         self.browser.find_element(*RegisterPageLocators.SUBMIT_SECOND_STEP_BTTN).click()
-        time.sleep(5)
+        
+        
+    
