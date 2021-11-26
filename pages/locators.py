@@ -8,7 +8,6 @@ class BasePageLocators:
 class RegisterPageLocators:
     REGISTRATION_FORM_OPEN_BTTN = (By.CSS_SELECTOR,".button-background.button-lg.orange")
     REGISTRATION_FORM = (By.CSS_SELECTOR,"#registrationForm")
-    SUBMIT_FIRST_STEP_BTTN = (By.CSS_SELECTOR,"#registrationForm .button-lg.orange")
     
     FIELD_EMAIL = (By.CSS_SELECTOR,"#registrationFormEmail-modal")
     FIELD_PASSWORD= (By.CSS_SELECTOR,"#RegistrationFormPassword-modal")
@@ -17,6 +16,7 @@ class RegisterPageLocators:
     FIELD_DOB = (By.CSS_SELECTOR, "#birthday")
     SELECT_GENDER_M= (By.CSS_SELECTOR,"div:nth-of-type(2) > .gender.register-label")
     SELECT_GENDER_F = (By.CSS_SELECTOR, "div:nth-of-type(3) > .gender.register-label")
+    SUBMIT_FIRST_STEP_BTTN = (By.CSS_SELECTOR, "#registrationForm .button-lg.orange")
 
     SELECT_COUNTRY =(By.CSS_SELECTOR,".ng-select-searchable [role]")
     SELECT_COUNTRY_ID = (By.CSS_SELECTOR,"div:nth-of-type(2) > div:nth-of-type(18)")
