@@ -16,6 +16,7 @@ def test_open_register_form(browser):
     page.open_and_accept_browser_cookies()
     page.click_register_button()
 
+
 def test_registration_first_step(browser):
     page = RegisterPage(browser, TestRegisterPageVariables.link)  # Открываем ссылку и принимаем куки
     page.open()
@@ -26,16 +27,25 @@ def test_registration_first_step(browser):
     page.click_submit_first_step()
     time.sleep(500)
 
+
 @pytest.mark.current_task
-def test_registration_second_step(browser):
-    page = RegisterPage(browser, TestRegisterPageVariables.link)  # Открываем ссылку и принимаем куки
+def test_registration_second_step(browser, config):
+    reg_scenario = ""
+    if config['platform'] == "dev":
+        link = TestRegisterPageVariables.dev_link
+        reg_scenario = "Email or Telephone"
+    else:
+        link = TestRegisterPageVariables.prod_link
+
+    page = RegisterPage(browser, link)  # Открываем ссылку и принимаем куки
     page.open()
     page.accept_browser_cookies()
     page.click_register_button()
     page.fill_first_step(str(time.time()) + "@mailinator.com", "Qwerty78+", page.generate_random_word(5),
                          page.generate_random_word(5), "10101990", 1)
     page.click_submit_first_step()
-    page.fill_second_step(page.generate_random_word(5), "TEST", "test", str(time.time())[:10])
+    page.fill_second_step(page.generate_random_word(5), "TEST", "test", str(time.time())[:10],reg_scenario)
+    time.sleep(10)
 
 
 def test_registration_full(browser):

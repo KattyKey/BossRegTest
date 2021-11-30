@@ -26,7 +26,7 @@ class RegisterPage(BasePage):
         else:
             self.browser.find_element(*RegisterPageLocators.SELECT_GENDER_F).click()
 
-    def fill_second_step(self,address,city,zip, phone):
+    def fill_second_step(self,address,city,zip, phone,reg_scenario):
         self.browser.find_element(*RegisterPageLocators.SELECT_COUNTRY).click()
         self.browser.find_element(*RegisterPageLocators.SELECT_COUNTRY_ID).click()
         self.browser.find_element(*RegisterPageLocators.FIELD_ADDRESS).send_keys(address)
@@ -35,8 +35,9 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.FIELD_PHONE).send_keys(phone)
         self.browser.find_element(*RegisterPageLocators.CHECK_CONFIRM_AGE).click()
         self.browser.find_element(*RegisterPageLocators.CHECK_ACCEPT_TERMS).click()
-        self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()
-        self.browser.find_element(*RegisterPageLocators.SUBMIT_SECOND_STEP_BTTN).click()
+        if reg_scenario=="Email or Telephone":
+            self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()
+        #self.browser.find_element(*RegisterPageLocators.SUBMIT_SECOND_STEP_BTTN).click()
 
         
     

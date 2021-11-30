@@ -1,6 +1,6 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import json
 
 @pytest.fixture(scope="function")
 def browser(request):
@@ -10,3 +10,8 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
 
+@pytest.fixture(scope='session')
+def config():
+  with open('config.json') as config_file:
+    data = json.load(config_file)
+  return data
