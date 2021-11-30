@@ -24,8 +24,12 @@ class RegisterPageLocators:
     FIELD_CITY = (By.CSS_SELECTOR, "#registrationFormCity-modal")
     FIELD_ZIP = (By.CSS_SELECTOR, "#registrationFormZipCode-modal")
     FIELD_PHONE = (By.CSS_SELECTOR, "#registrationFormPhoneNumber-modal")
-    CHECK_ASSEPT_ALL = (By.CSS_SELECTOR, "[for='acceptAll-modal']")
+    CHECK_ACCEPT_ALL = (By.CSS_SELECTOR, "[for='acceptAll-modal']")
+    CHECK_CONFIRM_AGE = (By.CSS_SELECTOR, "[for='isAdulthood-modal']")
+    CHECK_ACCEPT_TERMS = (By.CSS_SELECTOR, "[translate='registration\.acceptRules']")
+
     CHECK_EMAIL_ACTIVATION = (By.CSS_SELECTOR, "[for='registrationFormActivation_email']")
+
     
     SUBMIT_SECOND_STEP_BTTN = (By.CSS_SELECTOR, ".buttons-wrapper [type='submit']")
 
