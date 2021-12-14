@@ -14,7 +14,7 @@ class WorkWithAdminPage():
         return ([authorize.headers['Access-Token'], str(admin_user_id)])
 
     def switch_user_to_test(self, admin_user_login, admin_user_password, user_email):
-        user_id = str(self.find_user(admin_user_login, admin_user_password, user_email))
+        user_id = str(self.find_userID_by_email(admin_user_login, admin_user_password, user_email))
         token_id_pair = self.login_to_admin(admin_user_login, admin_user_password)
 
         make_user_test_url = "https://dev.admin.slotoboss.com/platform/user/admin/players/change-user-is-test"
@@ -25,7 +25,7 @@ class WorkWithAdminPage():
                                                    data=make_user_test_payload)
         print(make_user_test_result.json())
 
-    def find_user(self, admin_user_login, admin_user_password, user_email):
+    def find_userID_by_email(self, admin_user_login, admin_user_password, user_email):
         token_id_pair = self.login_to_admin(admin_user_login, admin_user_password)
         find_user_url = "https://dev.admin.slotoboss.com/platform/user/admin/players/find"
         find_user_payload = "{\"account\": { \"lastLogin\": {},\"dateRegistered\": {},\"firstDepositDate\": {} },\"client\": {\"email\": {\"flag\": \"like\", \"value\": \"" + user_email + "\"}},\"flags\": {\"withTestUsers\": true}}"

@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException,NoSuchElementException
@@ -15,10 +17,18 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
 
-    def accept_browser_cookies(self, timeout = 10):
-        WebDriverWait(self.browser, timeout).until(EC.frame_to_be_available_and_switch_to_it((BasePageLocators.BROWSER_COOKIES_FRAME)))
-        self.browser.find_element(*BasePageLocators.ASSEPT_BROWSER_COOKIES_BTN).click()
-        self.browser.switch_to.parent_frame()
+    def accept_browser_cookies(self,  tries = int(50), timelapse =0.1):
+        for i in range(tries):
+            time.sleep(timelapse)
+            if self.frame_switch(BasePageLocators.BROWSER_COOKIES_FRAME) ==True:
+                print("Element is found " + str(i))
+                self.browser.find_element(*BasePageLocators.ASSEPT_BROWSER_COOKIES_BTN).click()
+                self.browser.switch_to.parent_frame()
+                break;
+            else:
+                time.sleep(timelapse)
+                print("WAIT --------------1 "+str(i))
+        assert("Cookies frame not found")
 
     def generate_random_word(self,wordlength):
         word=""
@@ -26,5 +36,10 @@ class BasePage():
             word+=random.choice(string.ascii_letters)
         return word
 
-
+    def frame_switch(self,element):
+        try:
+            self.browser.switch_to.frame(self.browser.find_element(*element))
+            return True
+        except Exception :
+            return False
  

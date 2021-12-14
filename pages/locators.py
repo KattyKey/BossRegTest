@@ -19,6 +19,7 @@ class RegisterPageLocators:
     SUBMIT_FIRST_STEP_BTTN = (By.CSS_SELECTOR, "#registrationForm .button-lg.orange")
 
     SELECT_COUNTRY =(By.CSS_SELECTOR,".ng-select-searchable [role]")
+    FIND_COUNTRY = (By.CSS_SELECTOR,"div:nth-of-type(2) > div:nth-of-type(18)")
     SELECT_COUNTRY_ID = (By.CSS_SELECTOR,"div:nth-of-type(2) > div:nth-of-type(18)")
     FIELD_ADDRESS=(By.CSS_SELECTOR,"#registrationFormSecondStep-modal")
     FIELD_CITY = (By.CSS_SELECTOR, "#registrationFormCity-modal")
