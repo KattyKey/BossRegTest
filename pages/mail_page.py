@@ -4,6 +4,7 @@ import random
 import re
 import string
 import time
+import logging
 from email.header import decode_header
 from pages.base_page import BasePage
 
@@ -36,15 +37,15 @@ class MailPage():
         mail.close()  # close the mailbox
 
     def wait_email_to_come(self, mail, number_of_tries=50, waiting_time=1):
-        print("wait_email_to_come--------------------------")
+        logging.info("wait_email_to_come--------------------------")
 
         for tries in range(number_of_tries):
             mail.list()  # Выводит список папок в почтовом ящике.
             mail.select("inbox")  # Подключаемся к папке "входящие".  
-            print("tryyy--------------------------" + str(tries))
+            logging.info("tryyy--------------------------" + str(tries))
             result, data = mail.search(None, "ALL")
             id_list = data[0].split()  # Разделяем ID писем
-            print(len(id_list))
+            logging.info(len(id_list))
             if len(id_list) != 0:
                 return True
             time.sleep(waiting_time)
@@ -66,7 +67,7 @@ class MailPage():
             raw_email = raw_email.decode("utf-8").replace('=\r\n', '')
             mail_link = re.search(
                 r'https://((\w+\.\w+\.\w+)|(\w+\.\w+))[/](\w{2}-\w{2,3}|\w{2,7})/verify/email/(\d+)[/](\w+)', raw_email)
-            print(mail_link.group())
+            logging.info("Link detected "+mail_link.group())
             return mail_link.group()
         else:
             assert "Error, message is not found"

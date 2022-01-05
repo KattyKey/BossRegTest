@@ -7,8 +7,10 @@ from pages.variables import TestRegisterPageVariables, AdminPageVariables
 
 '''
 Запуск теста регистрации
-pytest -s -m current_test
+pytest -k test_registration_full
+
 '''
+
 
 def test_registration_first_step(browser):
     '''
@@ -51,7 +53,7 @@ def test_registration_second_step(browser, config):
                          1)
     page.click_submit_first_step()
     page.fill_second_step(page.generate_random_word(5), "TEST", "test", str(time.time())[:10], reg_scenario)
-    time.sleep(10)
+
 
 
 @pytest.mark.current_test
@@ -96,4 +98,4 @@ def test_registration_full(browser, config):
     WorkWithAdminPage().switch_user_to_test(AdminPageVariables.admin_user_login, AdminPageVariables.admin_user_password,
                                             reg_mail)
 
-    time.sleep(50)
+

@@ -1,34 +1,34 @@
 import random
 import string
 import time
-
+import logging
 from .locators import BasePageLocators
 
 
 class BasePage():
-    def __init__(self, browser, url, timeout=15):
+    def __init__(self, browser, url,wait_time = 10):
         self.browser = browser
         self.url = url
-        self.browser.implicitly_wait(timeout)
+        self.browser.implicitly_wait(wait_time)
 
     def open(self):
         self.browser.get(self.url)
 
-    def accept_browser_cookies(self, tries=int(50), timelapse=0.1):
+    def accept_browser_cookies(self, tries=50, timelapse=0.1):
         '''
             Ожидание появления кукис и их подтверждение
-        :param tries:  Количество попыток проверить возможность пперейти на фрейм
+        :param tries:  Количество попыток проверить возможность перейти на фрейм
         :param timelapse: Время для вейта между попытками
         '''
         for i in range(int(tries)):
             if self.frame_switch(BasePageLocators.BROWSER_COOKIES_FRAME) == True:
-                print("Element is found " + str(i))
+                logging.info("Element is found " + str(i))
                 self.browser.find_element(*BasePageLocators.ASSEPT_BROWSER_COOKIES_BTN).click()
                 self.browser.switch_to.parent_frame()
                 break;
             else:
                 time.sleep(timelapse)
-                print("WAIT --------------1 " + str(i))
+                logging.info("WAIT --------------1 " + str(i))
         assert ("Cookies frame not found")
 
     def generate_random_word(self, wordlength):
