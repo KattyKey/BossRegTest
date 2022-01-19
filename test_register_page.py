@@ -17,7 +17,7 @@ def test_registration_first_step(browser):
        ТЕСТ Заполнение первого шага
        Проверяем прописаные в конфиге параметры и в зависимости от них формируем линку, если это дев, прописываем сценарий регистрации
        Открываем страницу, принемаем куки
-       Запускаем регистрацию, заполняем оба шага
+       Запускаем регистрацию, заполняем шаг
     '''
     page = RegisterPage(browser, TestRegisterPageVariables.link)  # Открываем ссылку и принимаем куки
     page.open()
@@ -26,7 +26,7 @@ def test_registration_first_step(browser):
     page.fill_first_step(str(time.time()) + "@mailinator.com", "Qwerty78+", page.generate_random_word(5),
                          page.generate_random_word(5), "10101990", 1)
     page.click_submit_first_step()
-    time.sleep(500)
+
 
 
 def test_registration_second_step(browser, config):
