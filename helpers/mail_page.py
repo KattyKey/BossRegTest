@@ -1,19 +1,13 @@
-import email
+
 import imaplib
 import random
 import re
 import string
 import time
-import logging
-from email.header import decode_header
-from pages.base_page import BasePage
-
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from helpers import logging
 
 
-class MailPage():
+class Mailbox():
 
     def generate_random_email(self, original_email, number_of_symbols_to_add=8):
         splitted_email = original_email.split('@')
@@ -67,7 +61,7 @@ class MailPage():
             raw_email = raw_email.decode("utf-8").replace('=\r\n', '')
             mail_link = re.search(
                 r'https://((\w+\.\w+\.\w+)|(\w+\.\w+))[/](\w{2}-\w{2,3}|\w{2,7})/verify/email/(\d+)[/](\w+)', raw_email)
-            logging.info("Link detected "+mail_link.group())
+            logging.info("Link detected " + mail_link.group())
             return mail_link.group()
         else:
             assert "Error, message is not found"

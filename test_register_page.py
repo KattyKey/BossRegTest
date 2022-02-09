@@ -1,9 +1,10 @@
 import pytest
 import time
-from pages.register_page import RegisterPage
-from pages.mail_page import MailPage
-from pages.admin_page import WorkWithAdminPage
-from pages.variables import TestRegisterPageVariables, AdminPageVariables
+from pages.bosscasino.register_page import RegisterPage
+from helpers.mail_page import Mailbox
+from rest_api.admin_requests import WorkWithAdminPage
+from variables.bosscasino_variables import TestRegisterPageVariables
+from variables.rest_api_admin import  AdminRequestsVariables
 
 '''
 Запуск теста регистрации
@@ -36,7 +37,7 @@ def test_registration_second_step(browser, config):
        Открываем страницу, принемаем куки
        Запускаем регистрацию, заполняем оба шага
     '''
-    reg_mail = MailPage().generate_random_email(TestRegisterPageVariables.email)
+    reg_mail = Mailbox().generate_random_email(TestRegisterPageVariables.email)
     print(reg_mail)
     reg_scenario = ""
     if config['platform'] == "dev":
@@ -68,10 +69,10 @@ def test_registration_full(browser, config):
     Отмечаем юзера как тестового через админку
     '''
 
-    reg_mail = MailPage().generate_random_email(TestRegisterPageVariables.email)
+    reg_mail = Mailbox().generate_random_email(TestRegisterPageVariables.email)
     print(reg_mail)
-    MailPage().clear_mailbox(TestRegisterPageVariables.email,
-                             TestRegisterPageVariables.email_password)
+    Mailbox().clear_mailbox(TestRegisterPageVariables.email,
+                            TestRegisterPageVariables.email_password)
 
     reg_scenario = ""
     if config['platform'] == "dev":
@@ -89,13 +90,13 @@ def test_registration_full(browser, config):
     page.click_submit_first_step()
     page.fill_second_step(page.generate_random_word(5), "TEST", "test", str(time.time())[:10], reg_scenario)
     page.click_submit_second_step()
-    validation_link = MailPage().get_link_from_message(TestRegisterPageVariables.email,
-                                                       TestRegisterPageVariables.email_password)
+    validation_link = Mailbox().get_link_from_message(TestRegisterPageVariables.email,
+                                                      TestRegisterPageVariables.email_password)
 
     new_page = RegisterPage(browser, str(validation_link))
     new_page.open()
     new_page.click_reg_done_button()
-    WorkWithAdminPage().switch_user_to_test(AdminPageVariables.admin_user_login, AdminPageVariables.admin_user_password,
+    WorkWithAdminPage().switch_user_to_test(AdminRequestsVariables.admin_user_login, AdminRequestsVariables.admin_user_password,
                                             reg_mail)
 
 

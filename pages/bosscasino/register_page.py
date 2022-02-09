@@ -1,19 +1,14 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from pages.base_page import BasePage
-from pages.locators import RegisterPageLocators
-from selenium.webdriver.common.action_chains import ActionChains
-import time
+from base_page import BasePage
+from locators.locators_register import RegisterPageLocators
 
 
 class RegisterPage(BasePage):
+
     def click_register_button(self, timeout=15):
-        WebDriverWait(self.browser, timeout).until(
-            EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN)).click()
+        self.wait_n_click_element(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN)
 
     def click_reg_done_button(self, timeout=25):
-        WebDriverWait(self.browser, timeout).until(
-            EC.element_to_be_clickable(RegisterPageLocators.REGISTRATION_DONE_BTTN)).click()
+        self.wait_n_click_element(RegisterPageLocators.REGISTRATION_DONE_BTTN)
 
     def click_submit_first_step(self):
         self.browser.find_element(*RegisterPageLocators.SUBMIT_FIRST_STEP_BTTN).click()

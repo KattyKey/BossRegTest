@@ -1,8 +1,12 @@
 import random
 import string
 import time
+from telnetlib import EC
+
+from selenium.webdriver.support.wait import WebDriverWait
+
 import logging
-from .locators import BasePageLocators
+from locators.locators_register import BasePageLocators, RegisterPageLocators
 
 
 class BasePage():
@@ -31,6 +35,7 @@ class BasePage():
                 logging.info("WAIT --------------1 " + str(i))
         assert ("Cookies frame not found")
 
+
     def generate_random_word(self, wordlength):
         '''
         :param wordlength: Длинна слова для генерации
@@ -51,3 +56,8 @@ class BasePage():
             return True
         except Exception:
             return False
+
+    def wait_n_click_element(self,locator,timeout =20):
+        WebDriverWait(self.browser, timeout).until(
+            EC.element_to_be_clickable(locator)).click()
+
