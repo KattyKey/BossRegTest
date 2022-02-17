@@ -1,10 +1,10 @@
 import pytest
 import time
 from pages.bosscasino.register_page import RegisterPage
-from helpers.mail_page import Mailbox
+from helpers.mailbox_functions import Mailbox
 from rest_api.admin_requests import WorkWithAdminPage
 from variables.bosscasino_variables import TestRegisterPageVariables
-from variables.rest_api_admin import  AdminRequestsVariables
+from variables.admin_variables import  AdminRequestsVariables
 
 '''
 Запуск теста регистрации
@@ -92,11 +92,11 @@ def test_registration_full(browser, config):
     page.click_submit_second_step()
     validation_link = Mailbox().get_link_from_message(TestRegisterPageVariables.email,
                                                       TestRegisterPageVariables.email_password)
-
+    print(validation_link)
     new_page = RegisterPage(browser, str(validation_link))
     new_page.open()
     new_page.click_reg_done_button()
     WorkWithAdminPage().switch_user_to_test(AdminRequestsVariables.admin_user_login, AdminRequestsVariables.admin_user_password,
-                                            reg_mail)
+                                            reg_mail, config['platform'])
 
 

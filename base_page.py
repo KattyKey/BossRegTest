@@ -1,10 +1,8 @@
 import random
 import string
 import time
-from telnetlib import EC
-
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 import logging
 from locators.locators_register import BasePageLocators, RegisterPageLocators
 
@@ -57,7 +55,5 @@ class BasePage():
         except Exception:
             return False
 
-    def wait_n_click_element(self,locator,timeout =20):
-        WebDriverWait(self.browser, timeout).until(
-            EC.element_to_be_clickable(locator)).click()
+
 

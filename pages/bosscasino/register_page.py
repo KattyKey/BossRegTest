@@ -1,8 +1,11 @@
 from base_page import BasePage
 from locators.locators_register import RegisterPageLocators
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 class RegisterPage(BasePage):
+    def wait_n_click_element(self, locator, timeout=20):
+        WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()
 
     def click_register_button(self, timeout=15):
         self.wait_n_click_element(RegisterPageLocators.REGISTRATION_FORM_OPEN_BTTN)
@@ -36,7 +39,7 @@ class RegisterPage(BasePage):
         self.browser.find_element(*RegisterPageLocators.FIELD_PHONE).send_keys(phone)
         self.browser.find_element(*RegisterPageLocators.CHECK_CONFIRM_AGE).click()
         self.browser.find_element(*RegisterPageLocators.CHECK_ACCEPT_TERMS).click()
-        if reg_scenario == "Email or Telephone":
-            self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()
+        '''if reg_scenario == "Email or Telephone":
+            self.browser.find_element(*RegisterPageLocators.CHECK_EMAIL_ACTIVATION).click()'''
 
 

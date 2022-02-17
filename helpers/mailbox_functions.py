@@ -4,12 +4,13 @@ import random
 import re
 import string
 import time
-from helpers import logging
+import logging
 
 
 class Mailbox():
 
     def generate_random_email(self, original_email, number_of_symbols_to_add=8):
+        '''Generate new email on base of actual email and additional random letters and digits'''
         splitted_email = original_email.split('@')
         letters_and_digits = string.ascii_letters + string.digits
         result_str = ''.join((random.choice(letters_and_digits) for i in range(number_of_symbols_to_add)))
@@ -17,6 +18,7 @@ class Mailbox():
         return new_email
 
     def clear_mailbox(self, email, password):
+        ''' '''
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
         mail.login(email, password)
         mail.list()

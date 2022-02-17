@@ -6,10 +6,14 @@ class Log():
                         format='%(asctime)s %(message)s',
                         filemode='w')
 
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
     # Creating an object
     logger = logging.getLogger()
 
-    # Setting the threshold of logger to DEBUG
-    logger.setLevel(logging.INFO)
+    logging.getLogger('').addHandler(console)
+    logger = logging.getLogger(__name__)
+
+
 
 
