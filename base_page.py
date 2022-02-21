@@ -8,6 +8,7 @@ from locators.locators_register import BasePageLocators, RegisterPageLocators
 
 
 class BasePage():
+    #logging=Log.custom_logger()
     def __init__(self, browser, url,wait_time = 10):
         self.browser = browser
         self.url = url

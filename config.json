@@ -1,5 +1,6 @@
 {
   "browser": "chrome",
   "wait_time": 10,
-  "platform": "nodev"
+  "platform": "dev",
+  "casino": "bosscasino"
 }

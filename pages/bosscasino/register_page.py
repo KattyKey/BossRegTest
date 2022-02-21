@@ -3,6 +3,7 @@ from locators.locators_register import RegisterPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+
 class RegisterPage(BasePage):
     def wait_n_click_element(self, locator, timeout=20):
         WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(locator)).click()

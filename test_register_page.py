@@ -2,7 +2,7 @@ import pytest
 import time
 from pages.bosscasino.register_page import RegisterPage
 from helpers.mailbox_functions import Mailbox
-from rest_api.admin_requests import WorkWithAdminPage
+from rest_api.admin_requests import AdminRequest
 from variables.bosscasino_variables import TestRegisterPageVariables
 from variables.admin_variables import  AdminRequestsVariables
 
@@ -57,7 +57,7 @@ def test_registration_second_step(browser, config):
 
 
 
-@pytest.mark.current_test
+#@pytest.mark.current_test
 def test_registration_full(browser, config):
     '''
     Очищаем почту от сообщений
@@ -92,11 +92,18 @@ def test_registration_full(browser, config):
     page.click_submit_second_step()
     validation_link = Mailbox().get_link_from_message(TestRegisterPageVariables.email,
                                                       TestRegisterPageVariables.email_password)
-    print(validation_link)
     new_page = RegisterPage(browser, str(validation_link))
     new_page.open()
     new_page.click_reg_done_button()
-    WorkWithAdminPage().switch_user_to_test(AdminRequestsVariables.admin_user_login, AdminRequestsVariables.admin_user_password,
-                                            reg_mail, config['platform'])
+    AdminRequest().select_platform(config['platform'])
+    AdminRequest().switch_user_to_test(AdminRequestsVariables.admin_user_login, AdminRequestsVariables.admin_user_password,
+                                       reg_mail, config['platform'])
 
+
+@pytest.mark.current_test
+def test_make_user_test(browser, config):
+    AdminRequest().select_platform(config['platform'])
+    AdminRequest().switch_user_to_test(AdminRequestsVariables.admin_user_login,
+                                      AdminRequestsVariables.admin_user_password,
+                                            "ValidityUser6@mailinator.com", config['platform'])
 

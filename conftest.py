@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 import json
 
+
 @pytest.fixture(scope="function")
 def browser(request):
     browser = webdriver.Chrome()

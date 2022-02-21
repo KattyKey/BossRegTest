@@ -8,6 +8,7 @@ import logging
 
 
 class Mailbox():
+    #custom_logging = Log.custom_logger()
 
     def generate_random_email(self, original_email, number_of_symbols_to_add=8):
         '''Generate new email on base of actual email and additional random letters and digits'''
@@ -15,6 +16,7 @@ class Mailbox():
         letters_and_digits = string.ascii_letters + string.digits
         result_str = ''.join((random.choice(letters_and_digits) for i in range(number_of_symbols_to_add)))
         new_email = splitted_email[0] + "+" + result_str + "@" + splitted_email[1]
+        logging.info("email: "+new_email)
         return new_email
 
     def clear_mailbox(self, email, password):
@@ -38,10 +40,10 @@ class Mailbox():
         for tries in range(number_of_tries):
             mail.list()  # Выводит список папок в почтовом ящике.
             mail.select("inbox")  # Подключаемся к папке "входящие".  
-            logging.info("tryyy--------------------------" + str(tries))
+            #self.custom_logging.info("tryyy--------------------------" + str(tries))
             result, data = mail.search(None, "ALL")
             id_list = data[0].split()  # Разделяем ID писем
-            logging.info(len(id_list))
+            #self.custom_logging.info(len(id_list))
             if len(id_list) != 0:
                 return True
             time.sleep(waiting_time)
